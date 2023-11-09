@@ -4,32 +4,30 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CozaStore.Models;
 
 [Table("Blog")]
-    public class Blog
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+public class Blog
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
-        [Required(ErrorMessage = "Informe o Nome")]
-        [StringLength(60, ErrorMessage = "O Nome deve possuir no máximo 60 caracteres")]
+    [Required(ErrorMessage = "Informe o Nome")]
+    [StringLength(60, ErrorMessage = "O Nome deve possuir no máximo 60 caracteres")]
+    public string Nome { get; set; }
 
-        public string Nome { get; set; }
+    [Required(ErrorMessage = "Informe o Texto")]
+    [StringLength(600, ErrorMessage = "O Texto deve possuir no máximo 600 caracteres")]
+    public string Texto { get; set; }
 
-        [Required(ErrorMessage = "Informe o Texto")]
-        [StringLength(7, ErrorMessage = "O código de cor deve possuir no Máximo 60 caracteres")]
-        public string Texto { get; set; }
+    [StringLength(300)]
+    public string Foto { get; set; }
 
-        [StringLength(300)]
-        public string Foto { get; set; }
+    [Required]
+    [Display(Name = "Escritor")]
+    public string UsuarioId { get; set; }
+    [ForeignKey("UsuarioId")]
+    public Usuario Usuario { get; set; }
 
-        [Required]
-        [Display (Name = "Escritor")]
-        public string UsuarioId { get; set; }
-        [ForeignKey ("UsuarioId")]
-        public Usuario Usuario { get; set; }
-        
-        [Display (Name = "Data de Cadastro")]
-        public DateTime DataCadastro { get; set; } = DateTime.Now;
+    [Display(Name = "Data de Cadastro")]
+    public DateTime DataCadastro { get; set; } = DateTime.Now;
 
-        
-    }
+}
